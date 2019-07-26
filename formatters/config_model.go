@@ -1,23 +1,24 @@
 package formatters
 
-import "github.com/olehan/kek/config"
+import (
+    "github.com/olehan/kek/config"
+    "github.com/olehan/kek/pool"
+)
 
 type (
     FormatterConfig struct {
-        *config.PoolConfig
-        *config.BaseConfig
-        *config.SugarConfig
+        *config.Config
+        PoolState *pool.PoolState
     }
 )
 
-func NewFormatterConfig(
-    pc *config.PoolConfig,
-    bc *config.BaseConfig,
-    sc *config.SugarConfig,
-) *FormatterConfig {
+func NewFormatterConfig(c *config.Config) *FormatterConfig {
     return &FormatterConfig{
-        PoolConfig: pc,
-        BaseConfig: bc,
-        SugarConfig: sc,
+        Config: c,
     }
+}
+
+func (f *FormatterConfig) SetPoolState(ps *pool.PoolState) *FormatterConfig {
+    f.PoolState = ps
+    return f
 }
