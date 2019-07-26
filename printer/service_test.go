@@ -1,9 +1,13 @@
 package printer
 
-import "testing"
+import (
+    "github.com/olehan/kek/config"
+    "os"
+    "testing"
+)
 
 var (
-    _testPrinter = NewPrinter()
+    _testPrinter = NewPrinter(config.NewConfig().SetWriter(os.Stdout))
     _testPrinterValues = []interface{}{"values", 245345.345345, "are so", 24546, true, false, "values"}
 )
 

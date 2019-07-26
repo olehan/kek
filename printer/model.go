@@ -5,36 +5,28 @@ import (
     "github.com/olehan/kek/formatters"
     "github.com/olehan/kek/formatters/suggared"
     "github.com/olehan/kek/pool"
-    "os"
     "sync"
 )
 
 type (
     Printer struct {
-        BasePrinter
-        TemplatePrinter
-        StructuredPrinter
-
-        *config.PoolConfig
-        *config.BaseConfig
-        *config.SugarConfig
-
         formatter formatters.Formatter
         mutex     *sync.Mutex
+        pool      *pool.Pool
         fc        *formatters.FormatterConfig
     }
 )
 
-func NewPrinter() *Printer {
-    pc := config.NewPoolConfig().SetPool(pool.NewPool())
-    bc := config.NewBaseConfig().SetWriter(os.Stdout)
-    sc := config.NewSugarConfig()
+func NewPrinter(c *config.Config) *Printer {
     return &Printer{
-        PoolConfig:  pc,
-        BaseConfig:  bc,
-        SugarConfig: sc,
-        formatter:   suggared.NewSugaredFormatter(),
-        fc:          formatters.NewFormatterConfig(pc, bc, sc),
-        mutex:       &sync.Mutex{},
+        mutex:     &sync.Mutex{},
+        pool:      pool.NewPool(),
+        formatter: suggared.NewSugaredFormatter(),
+        fc:        formatters.NewFormatterConfig(c),
     }
+}
+
+func (p *Printer) SetFormatter(formatter formatters.Formatter) *Printer {
+    p.formatter = formatter
+    return p
 }

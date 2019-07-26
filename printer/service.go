@@ -7,60 +7,62 @@ import (
 )
 
 func (p *Printer) Print(v ...interface{}) (int, error) {
-    state := p.initState()
+    state, fc := p.initState()
     defer p.reset(state)
-    p.formatter.Print(p.getFormatterState(state), v...)
-    return p.Writer.Write(state.Buffer)
+    p.formatter.Print(fc, v...)
+    return p.fc.Writer.Write(state.Buffer)
 }
 
 func (p *Printer) Println(v ...interface{}) (int, error) {
-    state := p.initState()
+    state, fc := p.initState()
     defer p.reset(state)
-    p.formatter.Print(p.getFormatterState(state), v...)
+    p.formatter.Print(fc, v...)
     state.Buffer.WriteNewLine()
-    return p.Writer.Write(state.Buffer)
+    return p.fc.Writer.Write(state.Buffer)
 }
 
 func (p *Printer) PrintT(template string, v ...interface{}) (int, error) {
-    state := p.initState()
+    state, fc := p.initState()
     defer p.reset(state)
-    p.formatter.PrintTemplate(p.getFormatterState(state), template, v...)
+    p.formatter.PrintTemplate(fc, template, v...)
     state.Buffer.WriteNewLine()
-    return p.Writer.Write(state.Buffer)
+    return p.fc.Writer.Write(state.Buffer)
 }
 
 func (p *Printer) PrintTM(template string, v sugar.Map) (int, error) {
-    state := p.initState()
+    state, fc := p.initState()
     defer p.reset(state)
-    p.formatter.PrintTemplate(p.getFormatterState(state), template, v)
+    p.formatter.PrintTemplate(fc, template, v)
     state.Buffer.WriteNewLine()
-    return p.Writer.Write(state.Buffer)
+    return p.fc.Writer.Write(state.Buffer)
 }
 
 func (p *Printer) PrintTKV(template string, keyValues ...interface{}) (int, error) {
-    state := p.initState()
+    state, fc := p.initState()
     defer p.reset(state)
-    p.formatter.PrintTemplate(p.getFormatterState(state), template, keyValues...)
+    p.formatter.PrintTemplate(fc, template, keyValues...)
     state.Buffer.WriteNewLine()
-    return p.Writer.Write(state.Buffer)
+    return p.fc.Writer.Write(state.Buffer)
 }
 
 func (p *Printer) getFormatterState(ps *pool.PoolState) *formatters.FormatterConfig {
     p.fc.SetPoolState(ps)
-    if p.UseMutex {
+    if p.fc.UseMutex {
         p.mutex.Unlock()
     }
     return p.fc
 }
 
-func (p *Printer) initState() *pool.PoolState {
-    if p.UseMutex {
+func (p *Printer) initState() (ps *pool.PoolState, fc *formatters.FormatterConfig) {
+    if p.fc.UseMutex {
         p.mutex.Lock()
     }
-    return p.Pool.Get()
+    ps = p.pool.Get()
+    fc = p.getFormatterState(ps)
+    return
 }
 
 func (p *Printer) reset(ps *pool.PoolState) {
     p.fc.SetPoolState(nil)
-    p.Pool.Free(ps)
+    p.pool.Free(ps)
 }
