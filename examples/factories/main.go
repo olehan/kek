@@ -2,13 +2,13 @@ package main
 
 import (
     "github.com/olehan/kek"
-    "github.com/olehan/kek/formatters/suggared"
+    "github.com/olehan/kek/formatters/sugared"
     "os"
 )
 
 func main() {
     // Creating a new factory to populate new logger with a specific configuration.
-    factory := kek.NewFactory(os.Stdout, suggared.Formatter, "factory", "name")
+    factory := kek.NewFactory(os.Stdout, sugared.Formatter, "factory", "name")
     // Setting configurations of the factory.
     factory.
         SetWithDateTime(false, true, false).
@@ -20,5 +20,6 @@ func main() {
     // you still need to execute SetRandomNameColor for
     // every created logger individually.
     logger.SetRandomNameColor()
-    _, _ = logger.Debug.Println("wassup, kek")
+    logger.Debug.Println("wassup, kek")
+    logger.Info.Println("info works", 2)
 }
