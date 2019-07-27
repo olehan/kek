@@ -1,14 +1,12 @@
 package buffer
 
 import (
-    "fmt"
     "strconv"
 )
 
 // Write appends byte slice into buffer.
 func (b *Buffer) Write(p []byte) {
     *b = append(*b, p...)
-    fmt.Println()
 }
 
 // WriteString appends string into buffer.
