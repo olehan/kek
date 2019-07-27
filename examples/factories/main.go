@@ -20,5 +20,5 @@ func main() {
     // you still need to execute SetRandomNameColor for
     // every created logger individually.
     logger.SetRandomNameColor()
-    logger.Debug.Println("wassup, kek")
+    _, _ = logger.Debug.Println("wassup, kek")
 }
