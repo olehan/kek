@@ -2,13 +2,13 @@ package kek
 
 import (
     "github.com/olehan/kek/ds"
-    "github.com/olehan/kek/formatters/suggared"
+    "github.com/olehan/kek/formatters/sugared"
     "os"
     "testing"
 )
 
 var (
-    _testFactory = NewFactory(os.Stdout, suggared.NewSugaredFormatter())
+    _testFactory = NewFactory(os.Stdout, sugared.Formatter)
     _testLogger = _testFactory.NewLogger("name")
     _testLoggerValues = []interface{}{"values", 2345.245245, true, false, "are so", 245245245, "values"}
 )

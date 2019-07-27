@@ -3,7 +3,7 @@ package kek
 import (
     "github.com/olehan/kek/config"
     "github.com/olehan/kek/formatters"
-    "github.com/olehan/kek/formatters/suggared"
+    "github.com/olehan/kek/formatters/sugared"
     "io"
     "os"
     "strings"
@@ -22,7 +22,7 @@ const (
 )
 
 var (
-    defaultFactory = NewFactory(os.Stdout, suggared.Formatter)
+    defaultFactory = NewFactory(os.Stdout, sugared.Formatter)
 )
 
 func NewFactory(writer io.Writer, formatter formatters.Formatter, name ...string) *Factory {
