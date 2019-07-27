@@ -7,8 +7,6 @@ type (
         *SugaredBaseFormatter
         *SugaredTemplateFormatter
         *SugaredStructuredFormatter
-
-        formatterUtils *formatters.FormatterUtils
     }
 )
 

@@ -23,7 +23,6 @@ const (
 
 var (
     defaultFactory = NewFactory(os.Stdout, suggared.Formatter)
-    defaultLogger  = defaultFactory
 )
 
 func NewFactory(writer io.Writer, formatter formatters.Formatter, name ...string) *Factory {

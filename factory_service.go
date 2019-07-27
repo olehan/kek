@@ -41,14 +41,15 @@ func (f *Factory) newLoggerFromLeveledPrinter(c *config.Config) *Logger {
         Error: thunk(levels.Error),
         Panic: thunk(levels.Panic),
         Warn:  thunk(levels.Warn),
+        Fatal:  thunk(levels.Fatal),
     }
 }
 
 func (f *Factory) newLeveledPrinter(
     c *config.Config,
     formatter formatters.Formatter,
-) func(level levels.Level) *printer.Printer {
-    return func(level levels.Level) *printer.Printer {
+) func(level levels.Level) printer.PrinterRepo {
+    return func(level levels.Level) printer.PrinterRepo {
         return printer.NewPrinter(c, formatter, level)
     }
 }
