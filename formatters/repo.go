@@ -15,7 +15,6 @@ type (
     }
 
     TemplateFormatter interface {
-        // value 1 v true 1.1\n
         PrintTemplate(fs *FormatterConfig, template string, v ...interface{})
         // PrintFormatMap should print values that given in the form of a map.
         // Expected usage:

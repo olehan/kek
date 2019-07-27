@@ -1,8 +1,14 @@
 package formatters
 
 import (
+    "github.com/olehan/kek/ds"
     "github.com/olehan/kek/pool"
     "reflect"
+)
+
+const (
+    templateValueStart = '{'
+    templateValueEnd = '}'
 )
 
 func (f *FormatterUtils) StringifyValues(ps *pool.PoolState, v ...interface{}) {
@@ -82,4 +88,89 @@ func (f *FormatterUtils) StringifyStruct(ps *pool.PoolState, t reflect.Type) {
 
     ps.Buffer.WriteByte('}')
     ps.Buffer.WriteNewLine()
+}
+
+func (f *FormatterUtils) StringifyByTemplate(ps *pool.PoolState, template string, values ...interface{}) {
+    templateLen := len(template)
+    printedValues := 0
+    valuesLen := len(values)
+
+    for i := 0; i < templateLen; i++ {
+        templateLenIndex := templateLen - 1
+
+
+        if  i < templateLenIndex &&
+            printedValues < valuesLen &&
+            template[i] == templateValueStart &&
+            template[i + 1] == templateValueEnd {
+
+            f.StringifyValue(ps, values[printedValues])
+
+            printedValues++
+            i += 2
+        }
+
+        if templateLenIndex < i {
+            break
+        }
+
+        ps.Buffer.WriteByte(template[i])
+    }
+}
+
+func (f *FormatterUtils) StringifyByTemplateMap(ps *pool.PoolState, template string, v ds.Map) {
+    templateLen := len(template)
+
+    for i := 0; i < templateLen; i++ {
+        templateLenIndex := templateLen - 1
+
+        if  i < templateLenIndex &&
+            template[i] == templateValueStart &&
+            template[i + 1] == templateValueStart {
+
+            skipCount := 2
+
+            stopIndex := i + skipCount
+            stopIndexEnd := stopIndex
+            for j := stopIndex; j < templateLenIndex; j++ {
+                if template[j] == templateValueEnd && template[j + 1] == templateValueEnd {
+                    stopIndexEnd = j
+                    break
+                }
+            }
+
+            valueKey := template[stopIndex:stopIndexEnd]
+            if value, ok := v[valueKey]; ok {
+                f.StringifyValue(ps, value)
+                i += stopIndexEnd + skipCount - i
+            }
+        }
+
+        if templateLenIndex < i {
+            break
+        }
+
+        ps.Buffer.WriteByte(template[i])
+    }
+}
+
+func (f *FormatterUtils) StringifyByTemplateKeyValues(ps *pool.PoolState, template string, keyValues ...interface{}) {
+    keyValuesLen := len(keyValues)
+    for i := 0; i < keyValuesLen; i++ {
+        if keyValuesLen < i + 2 {
+            break
+        }
+
+        switch keyValues[i].(type) {
+        case string:
+        default:
+            i++
+            continue
+        }
+
+        ps.Map.Set(keyValues[i].(string), keyValues[i + 1])
+
+        i++
+    }
+    f.StringifyByTemplateMap(ps, template, ps.Map)
 }
