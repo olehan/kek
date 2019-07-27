@@ -1,4 +1,4 @@
-package suggared
+package sugared
 
 import "github.com/olehan/kek/formatters"
 

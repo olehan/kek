@@ -51,7 +51,7 @@ func (f *FormatterUtils) StringifyValue(ps *pool.PoolState, v interface{}) {
     case float64:
         ps.Buffer.WriteFloat(v.(float64), 64)
     case nil:
-        ps.Buffer.WriteString("nil")
+        ps.Buffer.WriteString("<nil>")
     case complex64:
     case complex128:
     default:

@@ -1,4 +1,4 @@
-package suggared
+package sugared
 
 import (
     "github.com/olehan/kek/colors"
@@ -14,9 +14,10 @@ var (
     dateTimeColor = colors.Bold.String()
 )
 
-func writeMetaInfo(fs *formatters.FormatterConfig) {
-    writeName(fs)
-    writeLevel(fs)
+func WriteMetaInfo(fs *formatters.FormatterConfig) {
+    WriteName(fs, " | ")
+
+    WriteLevel(fs)
 
     if fs.WithColors {
         fs.PoolState.Buffer.WriteString(dateTimeColor)
@@ -24,17 +25,17 @@ func writeMetaInfo(fs *formatters.FormatterConfig) {
 
     fs.PoolState.Buffer.WriteSpace()
 
-    writeDateTime(fs)
+    WriteDateTime(fs)
 
     if fs.WithColors {
         fs.PoolState.Buffer.WriteString(reset)
     }
 
-    writePID(fs)
+    WritePID(fs)
     fs.PoolState.Buffer.WriteString(":   ")
 }
 
-func writeName(fs *formatters.FormatterConfig)  {
+func WriteName(fs *formatters.FormatterConfig, separator string)  {
     if len(fs.Name) > 0 {
         shouldWriteColor := fs.WithColors && len(fs.NameColor) > 0
 
@@ -44,13 +45,11 @@ func writeName(fs *formatters.FormatterConfig)  {
 
         fs.PoolState.Buffer.WriteString(fs.Name)
 
-        if fs.WithNameTabulation {
-            for i := 0; i < names.LongestNameLen() - len(fs.Name); i++ {
-                fs.PoolState.Buffer.WriteSpace()
-            }
-        }
+        WriteNameTabulation(fs)
 
-        fs.PoolState.Buffer.WriteString(" | ")
+        if len(separator) > 0 {
+            fs.PoolState.Buffer.WriteString(separator)
+        }
 
         if shouldWriteColor {
             fs.PoolState.Buffer.WriteString(reset)
@@ -58,15 +57,31 @@ func writeName(fs *formatters.FormatterConfig)  {
     }
 }
 
-func writeLevel(fs *formatters.FormatterConfig)  {
+func WriteNameTabulation(fs *formatters.FormatterConfig)  {
+    if fs.WithNameTabulation {
+        for i := 0; i < names.LongestNameLen() - len(fs.Name); i++ {
+            fs.PoolState.Buffer.WriteSpace()
+        }
+    }
+}
+
+func WriteLevel(fs *formatters.FormatterConfig)  {
     if fs.WithColors {
         fs.PoolState.Buffer.WriteString(levels.ColoredLevelMap[fs.Level])
     } else {
         fs.PoolState.Buffer.WriteString(levels.NonColoredLevelMap[fs.Level])
     }
+
+    WriteLevelTabulation(fs)
 }
 
-func writeDateTime(fs *formatters.FormatterConfig)  {
+func WriteLevelTabulation(fs *formatters.FormatterConfig) {
+    for i := 0; i < levels.LongestLevelLen - len(levels.NonColoredLevelMap[fs.Level]); i++ {
+        fs.PoolState.Buffer.WriteSpace()
+    }
+}
+
+func WriteDateTime(fs *formatters.FormatterConfig)  {
     now := time.Now()
 
     if fs.WithDate {
@@ -93,7 +108,7 @@ func writeDateTime(fs *formatters.FormatterConfig)  {
     }
 }
 
-func writePID(fs *formatters.FormatterConfig)  {
+func WritePID(fs *formatters.FormatterConfig)  {
     if fs.WithPID {
         fs.PoolState.Buffer.WriteSpace()
         fs.PoolState.Buffer.WriteByte('[')
