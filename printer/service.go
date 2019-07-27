@@ -6,7 +6,7 @@ import (
     "github.com/olehan/kek/ds"
 )
 
-func (p *Printer) Print(v ...interface{}) *Printer {
+func (p *Printer) Print(v ...interface{}) PrinterRepo {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.Print(fc, v...)
@@ -14,7 +14,7 @@ func (p *Printer) Print(v ...interface{}) *Printer {
     return p
 }
 
-func (p *Printer) Println(v ...interface{}) *Printer {
+func (p *Printer) Println(v ...interface{}) PrinterRepo {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.Print(fc, v...)
@@ -23,7 +23,7 @@ func (p *Printer) Println(v ...interface{}) *Printer {
     return p
 }
 
-func (p *Printer) PrintT(template string, v ...interface{}) *Printer {
+func (p *Printer) PrintT(template string, v ...interface{}) PrinterRepo {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.PrintTemplate(fc, template, v...)
@@ -32,7 +32,7 @@ func (p *Printer) PrintT(template string, v ...interface{}) *Printer {
     return p
 }
 
-func (p *Printer) PrintTM(template string, v ds.Map) *Printer {
+func (p *Printer) PrintTM(template string, v ds.Map) PrinterRepo {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.PrintTemplateMap(fc, template, v)
@@ -41,7 +41,7 @@ func (p *Printer) PrintTM(template string, v ds.Map) *Printer {
     return p
 }
 
-func (p *Printer) PrintTKV(template string, keyValues ...interface{}) *Printer {
+func (p *Printer) PrintTKV(template string, keyValues ...interface{}) PrinterRepo {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.PrintTemplateKeyValue(fc, template, keyValues...)

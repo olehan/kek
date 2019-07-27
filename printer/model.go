@@ -18,7 +18,7 @@ type (
     }
 )
 
-func NewPrinter(c *config.Config, f formatters.Formatter, level levels.Level) *Printer {
+func NewPrinter(c *config.Config, f formatters.Formatter, level levels.Level) PrinterRepo {
     return &Printer{
         formatter: f,
         level:     level,
@@ -28,7 +28,7 @@ func NewPrinter(c *config.Config, f formatters.Formatter, level levels.Level) *P
     }
 }
 
-func (p *Printer) SetFormatter(formatter formatters.Formatter) *Printer {
+func (p *Printer) SetFormatter(formatter formatters.Formatter) PrinterRepo {
     p.formatter = formatter
     return p
 }
