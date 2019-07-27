@@ -8,7 +8,7 @@ import (
 
 var (
     _testFactory = NewFactory(os.Stdout, suggared.NewSugaredFormatter())
-    _testLogger = _testFactory.NewLogger()
+    _testLogger = _testFactory.NewLogger("name")
     _testLoggerValues = []interface{}{"values", 2345.245245, true, false, "are so", 245245245, "values"}
 )
 

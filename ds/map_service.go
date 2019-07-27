@@ -1,4 +1,4 @@
-package sugar
+package ds
 
 func (m Map) Set(key string, value interface{}) Map {
     m[key] = value

@@ -1,6 +1,6 @@
 package formatters
 
-import "github.com/olehan/kek/sugar"
+import "github.com/olehan/kek/ds"
 
 type (
     Formatter interface {
@@ -22,7 +22,7 @@ type (
         //  format: "values {{ a }} - {{ b }} - {{ unknown }}"
         //  values: Map{ "a": "it is A", "b": "rush B", }
         //  output: "values it is A - rush B - {{ unknown }}"
-        PrintTemplateMap(fs *FormatterConfig, template string, v sugar.Map)
+        PrintTemplateMap(fs *FormatterConfig, template string, v ds.Map)
         // PrintKeyValue should print values that given in the form of interface arguments
         // that is represented as key and value pair.
         // Expected usage:

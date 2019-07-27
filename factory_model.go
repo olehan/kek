@@ -6,22 +6,29 @@ import (
     "github.com/olehan/kek/formatters/suggared"
     "io"
     "os"
+    "strings"
 )
 
 type (
     Factory struct {
-        *config.Config
-        formatter formatters.Formatter
+        *LoggerConfig
+        namePrefix string
     }
 )
 
-var (
-    defaultFactory = NewFactory(os.Stdout, suggared.NewSugaredFormatter())
+const (
+    nameSeparator = "."
+    factoryLoggerNameSeparator = "/"
 )
 
-func NewFactory(w io.Writer, f formatters.Formatter) *Factory {
+var (
+    defaultFactory = NewFactory(os.Stdout, suggared.Formatter)
+    defaultLogger  = defaultFactory
+)
+
+func NewFactory(writer io.Writer, formatter formatters.Formatter, name ...string) *Factory {
     return &Factory{
-        formatter: f,
-        Config:    config.NewConfig().SetWriter(w),
+        namePrefix: strings.Join(name, nameSeparator),
+        LoggerConfig: NewLoggerConfig(config.NewConfig().SetWriter(writer)).SetFormatter(formatter),
     }
 }

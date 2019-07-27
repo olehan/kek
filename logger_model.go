@@ -1,13 +1,12 @@
 package kek
 
 import (
-    "github.com/olehan/kek/config"
     "github.com/olehan/kek/printer"
 )
 
 type (
     Logger struct {
-        *config.Config
+        *LoggerConfig
 
         Info    *printer.Printer
         Succ    *printer.Printer
@@ -20,6 +19,6 @@ type (
     }
 )
 
-func NewLogger() *Logger {
-    return defaultFactory.NewLogger()
+func NewLogger(name ...string) *Logger {
+    return defaultFactory.NewLogger(name...)
 }

@@ -33,24 +33,24 @@ const (
 var (
     // NonColoredLevelMap is a level map of non colored level names.
     NonColoredLevelMap = LevelMap{
-        Info: "info",
-        Succ: "succ",
+        Info:  "info ",
+        Succ:  "succ ",
         Debug: "debug",
-        Note: "note",
-        Warn: "warn",
+        Note:  "note ",
+        Warn:  "warn ",
         Error: "error",
         Fatal: "fatal",
         Panic: "panic",
     }
     // ColoredLevelMap is a level map of colored level names.
     ColoredLevelMap = LevelMap{
-        Info: colors.Blue.Add(NonColoredLevelMap[Info], colors.Faint),
+        Info: colors.Blue.Add(NonColoredLevelMap[Info]),
         Succ: colors.Green.Add(NonColoredLevelMap[Succ], colors.Bold),
         Debug: colors.Magenta.Add(NonColoredLevelMap[Debug]),
         Note: colors.Cyan.Add(NonColoredLevelMap[Note], colors.Bold),
         Warn: colors.Yellow.Add(NonColoredLevelMap[Warn], colors.Bold),
-        Error: colors.Red.Add(NonColoredLevelMap[Note], colors.Faint),
+        Error: colors.Red.Add(NonColoredLevelMap[Error]),
         Fatal: colors.Red.Add(NonColoredLevelMap[Note], colors.Bold),
-        Panic: colors.Red.Add(NonColoredLevelMap[Note], colors.Bold, colors.Underline),
+        Panic: colors.Red.Add(NonColoredLevelMap[Panic], colors.Bold, colors.Underline),
     }
 )

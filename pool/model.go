@@ -2,7 +2,7 @@ package pool
 
 import (
     "github.com/olehan/kek/buffer"
-    "github.com/olehan/kek/sugar"
+    "github.com/olehan/kek/ds"
     "sync"
 )
 
@@ -13,7 +13,7 @@ type (
 
     PoolState struct {
         Buffer buffer.Buffer
-        Map    sugar.Map
+        Map    ds.Map
     }
 )
 
@@ -23,7 +23,7 @@ func NewPool() *Pool {
             New: func() interface{} {
                 return &PoolState{
                     Buffer: buffer.NewBuffer(),
-                    Map:    sugar.Map{},
+                    Map:    ds.Map{},
                 }
             },
         },

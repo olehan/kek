@@ -12,6 +12,10 @@ type (
     }
 )
 
+var (
+    Formatter = NewSugaredFormatter()
+)
+
 func NewSugaredFormatter() formatters.Formatter {
     formatterUtils := formatters.NewFormatterUtils()
     return &SugaredFormatter{

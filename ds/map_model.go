@@ -1,4 +1,4 @@
-package sugar
+package ds
 
 type (
     Map map[string]interface{}

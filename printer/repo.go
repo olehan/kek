@@ -1,7 +1,7 @@
 package printer
 
 import (
-    "github.com/olehan/kek/sugar"
+    "github.com/olehan/kek/ds"
 )
 
 type (
@@ -12,12 +12,12 @@ type (
 
     TemplatePrinter interface {
         PrintT(template string, v ...interface{}) (int, error)
-        PrintTM(template string, v sugar.Map) (int, error)
+        PrintTM(template string, v ds.Map) (int, error)
         PrintTKV(template string, keyValues ...interface{}) (int, error)
     }
 
     StructuredPrinter interface {
-        PrintSM(v sugar.Map) (int, error)
+        PrintSM(v ds.Map) (int, error)
         PrintSKV(keyValues ...interface{}) (int, error)
     }
 )
