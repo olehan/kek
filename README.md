@@ -211,7 +211,7 @@ info  2019/7/28 21:56:20.501355000 [4811]:   message for key values
 ```
 
 <h2 id="installation">⬇️ Installation</h2>
-```javascript
+```go
 go get github.com/olehan/kek
 ```
 
