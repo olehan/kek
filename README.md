@@ -59,8 +59,7 @@ logger.name | debug  2019/7/28 20:54:40.683859000 [4666]:   And that is it!
 Coming soon...
 
 <h2 id="usage">🔧 Usage</h2>
-Aight. If you're staying with me to see more complex usage of this lib - go into the
-[examples](https://github.com/olehan/kek/tree/master/examples) or keep reading.
+Aight. If you're staying with me to see more complex usage of this lib - go into the examples folder or keep reading.
 
 #### Factories
 These are things that help you to populate logger with a specific configuration that
