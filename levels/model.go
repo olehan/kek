@@ -31,7 +31,7 @@ const (
 )
 
 var (
-    LongestLevelLen = getLongestLevelLen(NonColoredLevelMap)
+    longestLevelLen = getLongestLevelLen(NonColoredLevelMap)
     // NonColoredLevelMap is a level map of non colored level names.
     NonColoredLevelMap = LevelMap{
         Info:  "info",

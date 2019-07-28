@@ -1,5 +1,9 @@
 package levels
 
+func LongestLevelLen() int {
+    return longestLevelLen
+}
+
 func getLongestLevelLen(levelMap LevelMap) int {
     temp := 0
     for _, n := range levelMap {
