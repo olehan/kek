@@ -50,6 +50,14 @@ func (p *Printer) PrintTKV(template string, keyValues ...interface{}) PrinterRep
     return p
 }
 
+func (p *Printer) PrintSKV(message string, keyValues ...interface{}) PrinterRepo {
+    state, fc := p.initState()
+    defer p.reset(state)
+    p.formatter.PrintStructKeyValues(fc, message, keyValues...)
+    p.fc.Writer.Write(state.Buffer)
+    return p
+}
+
 func (p *Printer) getFormatterState(ps *pool.PoolState) *formatters.FormatterConfig {
     return p.fc.SetPoolState(ps).SetLevel(p.level)
 }

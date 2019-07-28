@@ -29,5 +29,6 @@ type (
     }
 
     StructuredPrinter interface {
+        PrintSKV(message string, keyValues ...interface{}) PrinterRepo
     }
 )

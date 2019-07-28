@@ -11,7 +11,7 @@ import (
 
 var (
     reset = colors.Reset.String()
-    dateTimeColor = colors.Bold.String()
+    bold  = colors.Bold.String()
 )
 
 func WriteMetaInfo(fs *formatters.FormatterConfig) {
@@ -20,7 +20,7 @@ func WriteMetaInfo(fs *formatters.FormatterConfig) {
     WriteLevel(fs)
 
     if fs.WithColors {
-        fs.PoolState.Buffer.WriteString(dateTimeColor)
+        fs.PoolState.Buffer.WriteString(bold)
     }
 
     fs.PoolState.Buffer.WriteSpace()
@@ -35,7 +35,7 @@ func WriteMetaInfo(fs *formatters.FormatterConfig) {
     fs.PoolState.Buffer.WriteString(":   ")
 }
 
-func WriteName(fs *formatters.FormatterConfig, separator string)  {
+func WriteName(fs *formatters.FormatterConfig, separator string) {
     if len(fs.Name) > 0 {
         shouldWriteColor := fs.WithColors && len(fs.NameColor) > 0
 
@@ -57,15 +57,16 @@ func WriteName(fs *formatters.FormatterConfig, separator string)  {
     }
 }
 
-func WriteNameTabulation(fs *formatters.FormatterConfig)  {
+func WriteNameTabulation(fs *formatters.FormatterConfig) {
     if fs.WithNameTabulation {
         for i := 0; i < names.LongestNameLen() - len(fs.Name); i++ {
+            println("has", string(fs.PoolState.Buffer))
             fs.PoolState.Buffer.WriteSpace()
         }
     }
 }
 
-func WriteLevel(fs *formatters.FormatterConfig)  {
+func WriteLevel(fs *formatters.FormatterConfig) {
     if fs.WithColors {
         fs.PoolState.Buffer.WriteString(levels.ColoredLevelMap[fs.Level])
     } else {
@@ -76,12 +77,12 @@ func WriteLevel(fs *formatters.FormatterConfig)  {
 }
 
 func WriteLevelTabulation(fs *formatters.FormatterConfig) {
-    for i := 0; i < levels.LongestLevelLen - len(levels.NonColoredLevelMap[fs.Level]); i++ {
+    for i := 0; i < levels.LongestLevelLen() - len(levels.NonColoredLevelMap[fs.Level]); i++ {
         fs.PoolState.Buffer.WriteSpace()
     }
 }
 
-func WriteDateTime(fs *formatters.FormatterConfig)  {
+func WriteDateTime(fs *formatters.FormatterConfig) {
     now := time.Now()
 
     if fs.WithDate {
@@ -108,7 +109,7 @@ func WriteDateTime(fs *formatters.FormatterConfig)  {
     }
 }
 
-func WritePID(fs *formatters.FormatterConfig)  {
+func WritePID(fs *formatters.FormatterConfig) {
     if fs.WithPID {
         fs.PoolState.Buffer.WriteSpace()
         fs.PoolState.Buffer.WriteByte('[')

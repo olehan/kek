@@ -154,23 +154,21 @@ func (f *FormatterUtils) StringifyByTemplateMap(ps *pool.PoolState, template str
     }
 }
 
-func (f *FormatterUtils) StringifyByTemplateKeyValues(ps *pool.PoolState, template string, keyValues ...interface{}) {
+func (f *FormatterUtils) KeyValuesToMap(ps *pool.PoolState, keyValues ...interface{}) {
     keyValuesLen := len(keyValues)
-    for i := 0; i < keyValuesLen; i++ {
+    for i := 0; i < keyValuesLen; i += 2 {
         if keyValuesLen < i + 2 {
             break
         }
 
-        switch keyValues[i].(type) {
+        key := keyValues[i]
+
+        switch key.(type) {
         case string:
         default:
-            i++
             continue
         }
 
-        ps.Map.Set(keyValues[i].(string), keyValues[i + 1])
-
-        i++
+        ps.Map.Set(key.(string), keyValues[i + 1])
     }
-    f.StringifyByTemplateMap(ps, template, ps.Map)
 }

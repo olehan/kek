@@ -4,9 +4,8 @@ import "github.com/olehan/kek/formatters"
 
 type (
     SugaredFormatter struct {
-        *SugaredBaseFormatter
-        *SugaredTemplateFormatter
-        *SugaredStructuredFormatter
+        formatters.Formatter
+        *formatters.FormatterUtils
     }
 )
 
@@ -15,10 +14,7 @@ var (
 )
 
 func NewSugaredFormatter() formatters.Formatter {
-    formatterUtils := formatters.NewFormatterUtils()
     return &SugaredFormatter{
-        SugaredBaseFormatter: NewSugaredBaseFormatter(formatterUtils),
-        SugaredTemplateFormatter: NewSugaredTemplateFormatter(formatterUtils),
-        SugaredStructuredFormatter: NewSugaredStructuredFormatter(formatterUtils),
+        FormatterUtils: formatters.NewFormatterUtils(),
     }
 }
