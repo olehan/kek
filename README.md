@@ -26,18 +26,18 @@
 ----
 
 <p align="center">
-    <strong><a href="#Intro">Intro</a></strong>
+    <strong><a href="#intro">Intro</a></strong>
     |
-    <strong><a href="#Installation">Usage</a></strong>
+    <strong><a href="#usage">Installation</a></strong>
     |
-    <strong><a href="#Usage">Installation</a></strong>
+    <strong><a href="#installation">Usage</a></strong>
     |
-    <strong><a href="#License">License</a></strong>
+    <strong><a href="#license">License</a></strong>
 </p>
 
 ----
 
-## 🌚 Intro
+<h2 id="intro">🌚 Intro</h2>
 A lot of people don't care about the context stuff and expect to see the code,
 output and specs, so without further a due:
 
@@ -53,7 +53,7 @@ logger.Debug.Println("And that is it!")
 logger.name | debug  2019/7/28 20:54:40.683859000 [4666]:   And that is it!
 ```
 
-## 🔧 Usage
+<h2 id="usage">🔧 Usage</h2>
 Aight. If you're staying with me to see more complex usage of this lib - go into the
 [examples](https://github.com/olehan/kek/tree/master/examples) or keep reading.
 
@@ -205,11 +205,11 @@ info  2019/7/28 21:56:20.501355000 [4811]:   message for key values
  > key4: 135135.13413
 ```
 
-## ⬇️ Installation
+<h2 id="installation">⬇️ Installation</h2>
 ```javascript
 go get github.com/olehan/kek
 ```
 
-## 🔖 License
+<h2 id="license">🔖 License</h2>
 It's [MIT](https://github.com/olehan/kek/blob/master/LICENSE).
 What else would you expect? 🌚
