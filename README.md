@@ -28,6 +28,8 @@
 <p align="center">
     <strong><a href="#intro">Intro</a></strong>
     |
+    <strong><a href="#benchmarks">Benchmarks</a></strong>
+    |
     <strong><a href="#usage">Usage</a></strong>
     |
     <strong><a href="#installation">Installation</a></strong>
@@ -52,6 +54,9 @@ logger.Debug.Println("And that is it!")
 ```
 logger.name | debug  2019/7/28 20:54:40.683859000 [4666]:   And that is it!
 ```
+
+<h2 id="benchmarks">🏃 Benchmarks</h2>
+Coming soon...
 
 <h2 id="usage">🔧 Usage</h2>
 Aight. If you're staying with me to see more complex usage of this lib - go into the
