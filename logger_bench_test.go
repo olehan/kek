@@ -47,12 +47,28 @@ func BenchmarkLogger_PrintTKV(b *testing.B) {
         "key2", "value2",
         "key3", "value3",
         "key4", "value4",
-        "unknown", 25245,
+        123, "going to skip it",
         245245,
     }
 
     b.ReportAllocs()
     for i := 0; i < b.N; i++ {
-        _testLogger.Debug.PrintTKV("there is a {{key1}} and {{key2}}, also {{key3}} asdo-a- {{key4}}", values...)
+        _testLogger.Debug.PrintTKV("there is a {{key1}} and {{key2}}, this is {{123}} also {{key3}} asdo-a- {{key4}}", values...)
+    }
+}
+
+func BenchmarkLogger_PrintSKV(b *testing.B) {
+    values := []interface{}{
+        "key1", "value1",
+        "key2", "value2",
+        "key3", "value3",
+        "key4", "value4",
+        245245, "value",
+        "unknown", 25245,
+    }
+
+    b.ReportAllocs()
+    for i := 0; i < b.N; i++ {
+        _testLogger.Debug.PrintSKV("longest message i've ever made:", values...)
     }
 }
