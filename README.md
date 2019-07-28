@@ -28,9 +28,9 @@
 <p align="center">
     <strong><a href="#intro">Intro</a></strong>
     |
-    <strong><a href="#usage">Installation</a></strong>
+    <strong><a href="#usage">Usage</a></strong>
     |
-    <strong><a href="#installation">Usage</a></strong>
+    <strong><a href="#installation">Installation</a></strong>
     |
     <strong><a href="#license">License</a></strong>
 </p>
@@ -148,7 +148,7 @@ userCommentsLogger.Warn.Println("Comments are refreshed")
 
 ***Output:***
 ```
-# Welp, to see the colors - hed over the examples
+# Welp, to see the colors - head over to the examples folder.
 service/user.posts    | debug 2019/7/28 21:27:27.788431000 [4715]: Post edited
 service/user.comments | warn  2019/7/28 21:27:27.788521000 [4715]: Comments are refreshed
 ```
