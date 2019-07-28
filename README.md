@@ -46,7 +46,7 @@ output and specs, so without further a due:
 ***Code:***
 ```go
 // Here we are, just creating our new logger with a default 'formatter'.
-// Will talk about formatters letter on Usage section...
+// We'll talk about formatters letter on Usage section...
 logger := kek.NewLogger("logger", "name")
 logger.Debug.Println("And that is it!")
 ```
