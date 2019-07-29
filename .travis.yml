@@ -6,7 +6,8 @@ os:
   - windows
 
 go:
-  - 1.x
+  - "1.11"
+  - "1.12"
   - master
 
 install: skip
