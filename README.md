@@ -216,5 +216,5 @@ go get github.com/olehan/kek
 ```
 
 <h2 id="license">🔖 License</h2>
-It's [MIT](https://github.com/olehan/kek/blob/master/LICENSE).
+It's [MIT](LICENSE).
 What else would you expect? 🌚
