@@ -1,0 +1,16 @@
+language: go
+
+os:
+  - osx
+  - linux
+  - windows
+
+go:
+  - 1.x
+  - master
+
+install: skip
+
+script:
+  - golint -set_exit_status buffer colors config ds formatters levels names pool printer .
+  - go test -race -v ./...
