@@ -9,11 +9,13 @@ import (
     "strings"
 )
 
+// NewLogger returns a new logger with an extended configuration.
 func (f *Factory) NewLogger(name ...string) *Logger {
     n := f.registerLoggerName(name...)
     return f.newLoggerFromLeveledPrinter(f.Config.Copy().SetName(n))
 }
 
+// NewLinkedLogger returns a new logger with linked configuration.
 func (f *Factory) NewLinkedLogger(name ...string) *Logger {
     n := f.registerLoggerName(name...)
     return f.newLoggerFromLeveledPrinter(f.Config.SetName(n))
@@ -48,8 +50,8 @@ func (f *Factory) newLoggerFromLeveledPrinter(c *config.Config) *Logger {
 func (f *Factory) newLeveledPrinter(
     c *config.Config,
     formatter formatters.Formatter,
-) func(level levels.Level) printer.PrinterRepo {
-    return func(level levels.Level) printer.PrinterRepo {
+) func(level levels.Level) printer.FullPrinter {
+    return func(level levels.Level) printer.FullPrinter {
         return printer.NewPrinter(c, formatter, level)
     }
 }

@@ -6,29 +6,39 @@ import (
 )
 
 type (
-    LoggerPrinterRepo interface {
-        PrinterRepo
-        SetFormatter(formatter formatters.Formatter) PrinterRepo
+    // LoggerPrinter is an interface that gives access to the
+    // configuration functions of the printer.
+    LoggerPrinter interface {
+        FullPrinter
+        SetFormatter(formatter formatters.Formatter) FullPrinter
     }
 
-    PrinterRepo interface {
+    // FullPrinter is an interface that describes printing
+    // functionality of the printer.
+    FullPrinter interface {
         BasePrinter
         TemplatePrinter
         StructuredPrinter
     }
 
+    // BasePrinter is an interface that describes the base
+    // printing functionality.
     BasePrinter interface {
-        Print(values ...interface{}) PrinterRepo
-        Println(values ...interface{}) PrinterRepo
+        Print(values ...interface{}) FullPrinter
+        Println(values ...interface{}) FullPrinter
     }
 
+    // TemplatePrinter is an interface that describes
+    // formatting/templating printer functionality.
     TemplatePrinter interface {
-        PrintT(template string, values ...interface{}) PrinterRepo
-        PrintTM(template string, values ds.Map) PrinterRepo
-        PrintTKV(template string, keyValues ...interface{}) PrinterRepo
+        PrintT(template string, values ...interface{}) FullPrinter
+        PrintTM(template string, values ds.Map) FullPrinter
+        PrintTKV(template string, keyValues ...interface{}) FullPrinter
     }
 
+    // StructuredPrinter is an interface that describes
+    // structured printer functionality.
     StructuredPrinter interface {
-        PrintSKV(message string, keyValues ...interface{}) PrinterRepo
+        PrintSKV(message string, keyValues ...interface{}) FullPrinter
     }
 )

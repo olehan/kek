@@ -11,14 +11,18 @@ const (
     templateValueEnd = '}'
 )
 
-func (f *FormatterUtils) StringifyValues(ps *pool.PoolState, v ...interface{}) {
+// StringifyValues loops through the given values, converts them into string
+// and writes into a buffer, separating each value
+func (f *FormatterUtils) StringifyValues(ps *pool.State, v ...interface{}) {
     for _, n := range v {
         f.StringifyValue(ps, n)
         ps.Buffer.WriteSpace()
     }
 }
 
-func (f *FormatterUtils) StringifyValue(ps *pool.PoolState, v interface{}) {
+// StringifyValue writes into the buffer converted to string value that
+// it receives.
+func (f *FormatterUtils) StringifyValue(ps *pool.State, v interface{}) {
     switch v.(type) {
     case int:
         ps.Buffer.WriteInt(int64(v.(int)))
@@ -59,7 +63,8 @@ func (f *FormatterUtils) StringifyValue(ps *pool.PoolState, v interface{}) {
     }
 }
 
-func (f *FormatterUtils) StringifyValueWithReflect(ps *pool.PoolState, v interface{}) {
+// StringifyValueWithReflect converts the given value using the reflect.
+func (f *FormatterUtils) StringifyValueWithReflect(ps *pool.State, v interface{}) {
     typeOfValue := reflect.TypeOf(v)
     switch typeOfValue.Kind() {
     case reflect.Struct:
@@ -70,7 +75,8 @@ func (f *FormatterUtils) StringifyValueWithReflect(ps *pool.PoolState, v interfa
     }
 }
 
-func (f *FormatterUtils) StringifyStruct(ps *pool.PoolState, t reflect.Type) {
+// StringifyStruct converts structure into a string.
+func (f *FormatterUtils) StringifyStruct(ps *pool.State, t reflect.Type) {
     ps.Buffer.WriteNewLine()
     ps.Buffer.WriteString(t.Name())
     ps.Buffer.WriteSpace()
@@ -90,7 +96,8 @@ func (f *FormatterUtils) StringifyStruct(ps *pool.PoolState, t reflect.Type) {
     ps.Buffer.WriteNewLine()
 }
 
-func (f *FormatterUtils) StringifyByTemplate(ps *pool.PoolState, template string, values ...interface{}) {
+// StringifyByTemplate converts value into a string by the given format/template.
+func (f *FormatterUtils) StringifyByTemplate(ps *pool.State, template string, values ...interface{}) {
     templateLen := len(template)
     printedValues := 0
     valuesLen := len(values)
@@ -118,7 +125,9 @@ func (f *FormatterUtils) StringifyByTemplate(ps *pool.PoolState, template string
     }
 }
 
-func (f *FormatterUtils) StringifyByTemplateMap(ps *pool.PoolState, template string, v ds.Map) {
+// StringifyByTemplateMap converts value that is given in the form of a map
+// into a string by the given format/template
+func (f *FormatterUtils) StringifyByTemplateMap(ps *pool.State, template string, v ds.Map) {
     templateLen := len(template)
 
     for i := 0; i < templateLen; i++ {
@@ -154,7 +163,9 @@ func (f *FormatterUtils) StringifyByTemplateMap(ps *pool.PoolState, template str
     }
 }
 
-func (f *FormatterUtils) KeyValuesToMap(ps *pool.PoolState, keyValues ...interface{}) {
+// KeyValuesToMap loops through the key value pair array, setting them
+// into a Map in the pool state.
+func (f *FormatterUtils) KeyValuesToMap(ps *pool.State, keyValues ...interface{}) {
     keyValuesLen := len(keyValues)
     for i := 0; i < keyValuesLen; i += 2 {
         if keyValuesLen < i + 2 {

@@ -5,12 +5,12 @@ import (
     "github.com/olehan/kek/formatters"
 )
 
-func (m *MinifiedFormatter) Print(fs *formatters.FormatterConfig, v ...interface{}) {
+func (m *FormatterModel) Print(fs *formatters.FormatterConfig, v ...interface{}) {
     WriteMetaInfo(fs)
     m.StringifyValues(fs.PoolState, v...)
 }
 
-func (m *MinifiedFormatter) PrintTemplate(
+func (m *FormatterModel) PrintTemplate(
     fs *formatters.FormatterConfig,
     template string,
     v ...interface{},
@@ -19,7 +19,7 @@ func (m *MinifiedFormatter) PrintTemplate(
     m.StringifyByTemplate(fs.PoolState, template, v...)
 }
 
-func (m *MinifiedFormatter) PrintTemplateMap(
+func (m *FormatterModel) PrintTemplateMap(
     fs *formatters.FormatterConfig,
     template string,
     v ds.Map,
@@ -28,7 +28,7 @@ func (m *MinifiedFormatter) PrintTemplateMap(
     m.StringifyByTemplateMap(fs.PoolState, template, v)
 }
 
-func (m *MinifiedFormatter) PrintTemplateKeyValue(
+func (m *FormatterModel) PrintTemplateKeyValue(
     fs *formatters.FormatterConfig,
     template string,
     keyValues ...interface{},
@@ -38,7 +38,7 @@ func (m *MinifiedFormatter) PrintTemplateKeyValue(
     m.StringifyByTemplateMap(fs.PoolState, template, fs.PoolState.Map)
 }
 
-func (m *MinifiedFormatter) PrintStructKeyValues(
+func (m *FormatterModel) PrintStructKeyValues(
     fs *formatters.FormatterConfig,
     message string,
     keyValues ...interface{},

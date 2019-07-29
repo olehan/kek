@@ -14,11 +14,12 @@ func JoinColors(colors ...Color) string {
     return additionalColors
 }
 
-// String stringify's color and joins it with additional color options.
+// String joins colors and puts them into an escape code.
 func String(colors ...Color) string {
     return fmt.Sprintf("\x1b[%vm", JoinColors(colors...))
 }
 
+// String stringify's color and joins it with additional color options.
 func (c Color) String(colors ...Color) string {
     return String(append(colors, c)...)
 }

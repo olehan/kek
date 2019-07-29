@@ -11,6 +11,7 @@ var (
     bold  = colors.Bold.String()
 )
 
+// WriteMetaInfo writes meta info for minified formatter logs.
 func WriteMetaInfo(fs *formatters.FormatterConfig) {
     sugared.WriteName(fs, " - ")
     sugared.WriteLevel(fs)

@@ -5,12 +5,12 @@ import (
     "github.com/olehan/kek/formatters"
 )
 
-func (s *SugaredFormatter) Print(fs *formatters.FormatterConfig, v ...interface{}) {
+func (s *FormatterModel) Print(fs *formatters.FormatterConfig, v ...interface{}) {
     WriteMetaInfo(fs)
     s.StringifyValues(fs.PoolState, v...)
 }
 
-func (s *SugaredFormatter) PrintTemplate(
+func (s *FormatterModel) PrintTemplate(
     fs *formatters.FormatterConfig,
     template string,
     v ...interface{},
@@ -19,7 +19,7 @@ func (s *SugaredFormatter) PrintTemplate(
     s.StringifyByTemplate(fs.PoolState, template, v...)
 }
 
-func (s *SugaredFormatter) PrintTemplateMap(
+func (s *FormatterModel) PrintTemplateMap(
     fs *formatters.FormatterConfig,
     template string,
     v ds.Map,
@@ -28,7 +28,7 @@ func (s *SugaredFormatter) PrintTemplateMap(
     s.StringifyByTemplateMap(fs.PoolState, template, v)
 }
 
-func (s *SugaredFormatter) PrintTemplateKeyValue(
+func (s *FormatterModel) PrintTemplateKeyValue(
     fs *formatters.FormatterConfig,
     template string,
     keyValues ...interface{},
@@ -38,7 +38,7 @@ func (s *SugaredFormatter) PrintTemplateKeyValue(
     s.StringifyByTemplateMap(fs.PoolState, template, fs.PoolState.Map)
 }
 
-func (s *SugaredFormatter) PrintStructKeyValues(
+func (s *FormatterModel) PrintStructKeyValues(
     fs *formatters.FormatterConfig,
     message string,
     keyValues ...interface{},

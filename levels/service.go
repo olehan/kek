@@ -1,5 +1,6 @@
 package levels
 
+// LongestLevelLen returns a copy of the longestLevelLen.
 func LongestLevelLen() int {
     return longestLevelLen
 }
