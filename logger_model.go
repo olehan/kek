@@ -6,32 +6,35 @@ import (
 )
 
 type (
+    // Logger is an entity that configures and holds leveled printers.
     Logger struct {
         *LoggerConfig
 
-        Info    printer.PrinterRepo
-        Succ    printer.PrinterRepo
-        Debug   printer.PrinterRepo
-        Note    printer.PrinterRepo
-        Warn    printer.PrinterRepo
-        Error   printer.PrinterRepo
-        Fatal   printer.PrinterRepo
-        Panic   printer.PrinterRepo
+        Info    printer.FullPrinter
+        Succ    printer.FullPrinter
+        Debug   printer.FullPrinter
+        Note    printer.FullPrinter
+        Warn    printer.FullPrinter
+        Error   printer.FullPrinter
+        Fatal   printer.FullPrinter
+        Panic   printer.FullPrinter
     }
 )
 
+// NewLogger returns a new logger created from a default factory.
 func NewLogger(name ...string) *Logger {
     return defaultFactory.NewLogger(name...)
 }
 
+// SetFormatter sets one formatter across the all leveled printers.
 func (l *Logger) SetFormatter(formatter formatters.Formatter) *Logger {
-    l.Debug.(printer.LoggerPrinterRepo).SetFormatter(formatter)
-    l.Info.(printer.LoggerPrinterRepo).SetFormatter(formatter)
-    l.Warn.(printer.LoggerPrinterRepo).SetFormatter(formatter)
-    l.Fatal.(printer.LoggerPrinterRepo).SetFormatter(formatter)
-    l.Error.(printer.LoggerPrinterRepo).SetFormatter(formatter)
-    l.Panic.(printer.LoggerPrinterRepo).SetFormatter(formatter)
-    l.Note.(printer.LoggerPrinterRepo).SetFormatter(formatter)
-    l.Succ.(printer.LoggerPrinterRepo).SetFormatter(formatter)
+    l.Debug.(printer.LoggerPrinter).SetFormatter(formatter)
+    l.Info.(printer.LoggerPrinter).SetFormatter(formatter)
+    l.Warn.(printer.LoggerPrinter).SetFormatter(formatter)
+    l.Fatal.(printer.LoggerPrinter).SetFormatter(formatter)
+    l.Error.(printer.LoggerPrinter).SetFormatter(formatter)
+    l.Panic.(printer.LoggerPrinter).SetFormatter(formatter)
+    l.Note.(printer.LoggerPrinter).SetFormatter(formatter)
+    l.Succ.(printer.LoggerPrinter).SetFormatter(formatter)
     return l
 }

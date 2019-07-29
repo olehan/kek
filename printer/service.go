@@ -6,7 +6,8 @@ import (
     "github.com/olehan/kek/ds"
 )
 
-func (p *Printer) Print(v ...interface{}) PrinterRepo {
+// Print manages base formatters writing functionality.
+func (p *Printer) Print(v ...interface{}) FullPrinter {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.Print(fc, v...)
@@ -14,7 +15,9 @@ func (p *Printer) Print(v ...interface{}) PrinterRepo {
     return p
 }
 
-func (p *Printer) Println(v ...interface{}) PrinterRepo {
+// Println manages base formatters writing functionality
+// adding a new line to the end of the buffer.
+func (p *Printer) Println(v ...interface{}) FullPrinter {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.Print(fc, v...)
@@ -23,7 +26,9 @@ func (p *Printer) Println(v ...interface{}) PrinterRepo {
     return p
 }
 
-func (p *Printer) PrintT(template string, v ...interface{}) PrinterRepo {
+// PrintT manages template formatters writing functionality
+// adding a new line to the end of the buffer.
+func (p *Printer) PrintT(template string, v ...interface{}) FullPrinter {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.PrintTemplate(fc, template, v...)
@@ -32,7 +37,9 @@ func (p *Printer) PrintT(template string, v ...interface{}) PrinterRepo {
     return p
 }
 
-func (p *Printer) PrintTM(template string, v ds.Map) PrinterRepo {
+// PrintTM manages map template formatters writing functionality
+// adding a new line to the end of the buffer.
+func (p *Printer) PrintTM(template string, v ds.Map) FullPrinter {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.PrintTemplateMap(fc, template, v)
@@ -41,7 +48,9 @@ func (p *Printer) PrintTM(template string, v ds.Map) PrinterRepo {
     return p
 }
 
-func (p *Printer) PrintTKV(template string, keyValues ...interface{}) PrinterRepo {
+// PrintTKV manages key value template formatters writing functionality
+// adding a new line to the end of the buffer.
+func (p *Printer) PrintTKV(template string, keyValues ...interface{}) FullPrinter {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.PrintTemplateKeyValue(fc, template, keyValues...)
@@ -50,7 +59,9 @@ func (p *Printer) PrintTKV(template string, keyValues ...interface{}) PrinterRep
     return p
 }
 
-func (p *Printer) PrintSKV(message string, keyValues ...interface{}) PrinterRepo {
+// PrintSKV manages structured key value formatters writing functionality
+// adding a new line to the end of the buffer.
+func (p *Printer) PrintSKV(message string, keyValues ...interface{}) FullPrinter {
     state, fc := p.initState()
     defer p.reset(state)
     p.formatter.PrintStructKeyValues(fc, message, keyValues...)
@@ -58,11 +69,11 @@ func (p *Printer) PrintSKV(message string, keyValues ...interface{}) PrinterRepo
     return p
 }
 
-func (p *Printer) getFormatterState(ps *pool.PoolState) *formatters.FormatterConfig {
+func (p *Printer) getFormatterState(ps *pool.State) *formatters.FormatterConfig {
     return p.fc.SetPoolState(ps).SetLevel(p.level)
 }
 
-func (p *Printer) initState() (ps *pool.PoolState, fc *formatters.FormatterConfig) {
+func (p *Printer) initState() (ps *pool.State, fc *formatters.FormatterConfig) {
     if p.fc.UseMutex {
         p.mutex.Lock()
     }
@@ -71,7 +82,7 @@ func (p *Printer) initState() (ps *pool.PoolState, fc *formatters.FormatterConfi
     return
 }
 
-func (p *Printer) reset(ps *pool.PoolState) {
+func (p *Printer) reset(ps *pool.State) {
     p.fc.SetPoolState(nil)
     p.pool.Free(ps)
     if p.fc.UseMutex {

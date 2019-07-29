@@ -14,6 +14,7 @@ var (
     bold  = colors.Bold.String()
 )
 
+// WriteMetaInfo writes meta info for sugared formatter logs.
 func WriteMetaInfo(fs *formatters.FormatterConfig) {
     WriteName(fs, " | ")
 
@@ -35,6 +36,7 @@ func WriteMetaInfo(fs *formatters.FormatterConfig) {
     fs.PoolState.Buffer.WriteString(":   ")
 }
 
+// WriteName writes the name from the formatter config if it exists.
 func WriteName(fs *formatters.FormatterConfig, separator string) {
     if len(fs.Name) > 0 {
         shouldWriteColor := fs.WithColors && len(fs.NameColor) > 0
@@ -57,6 +59,8 @@ func WriteName(fs *formatters.FormatterConfig, separator string) {
     }
 }
 
+// WriteNameTabulation writes the name tabulation if an appropriate
+// config property is enabled.
 func WriteNameTabulation(fs *formatters.FormatterConfig) {
     if fs.WithNameTabulation {
         for i := 0; i < names.LongestNameLen() - len(fs.Name); i++ {
@@ -66,6 +70,7 @@ func WriteNameTabulation(fs *formatters.FormatterConfig) {
     }
 }
 
+// WriteLevel writes the level according to the config.
 func WriteLevel(fs *formatters.FormatterConfig) {
     if fs.WithColors {
         fs.PoolState.Buffer.WriteString(levels.ColoredLevelMap[fs.Level])
@@ -76,12 +81,16 @@ func WriteLevel(fs *formatters.FormatterConfig) {
     WriteLevelTabulation(fs)
 }
 
+// WriteLevelTabulation writes the level tabulation depending
+// on a longest level length.
 func WriteLevelTabulation(fs *formatters.FormatterConfig) {
     for i := 0; i < levels.LongestLevelLen() - len(levels.NonColoredLevelMap[fs.Level]); i++ {
         fs.PoolState.Buffer.WriteSpace()
     }
 }
 
+// WriteDateTime writes date, time and nano seconds
+// depending on the configs.
 func WriteDateTime(fs *formatters.FormatterConfig) {
     now := time.Now()
 
@@ -109,6 +118,7 @@ func WriteDateTime(fs *formatters.FormatterConfig) {
     }
 }
 
+// WritePID writes a process id depends on config.
 func WritePID(fs *formatters.FormatterConfig) {
     if fs.WithPID {
         fs.PoolState.Buffer.WriteSpace()

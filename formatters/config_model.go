@@ -7,24 +7,30 @@ import (
 )
 
 type (
+    // FormatterConfig stores formatter specific configurations
+    // and extends a base config struct. FormatterConfig is passed
+    // to all formatter functions.
     FormatterConfig struct {
         *config.Config
         Level     levels.Level
-        PoolState *pool.PoolState
+        PoolState *pool.State
     }
 )
 
+// NewFormatterConfig returns a new FormatterConfig.
 func NewFormatterConfig(c *config.Config) *FormatterConfig {
     return &FormatterConfig{
         Config: c,
     }
 }
 
-func (f *FormatterConfig) SetPoolState(ps *pool.PoolState) *FormatterConfig {
+// SetPoolState sets a new pool state into the formatter config.
+func (f *FormatterConfig) SetPoolState(ps *pool.State) *FormatterConfig {
     f.PoolState = ps
     return f
 }
 
+// SetLevel sets a new level into the formatter config.
 func (f *FormatterConfig) SetLevel(level levels.Level) *FormatterConfig {
     f.Level = level
     return f

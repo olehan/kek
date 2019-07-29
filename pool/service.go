@@ -1,14 +1,18 @@
 package pool
 
-func (p *Pool) Get() *PoolState {
-    return p.p.Get().(*PoolState)
+// Get is a type-safe wrapper of the sync.Pool.Get()
+func (p *Pool) Get() *State {
+    return p.p.Get().(*State)
 }
 
-func (p *Pool) Set(ps *PoolState) {
+// Set is a type-safe wrapper of the sync.Pool.Put()
+func (p *Pool) Set(ps *State) {
     p.p.Put(ps)
 }
 
-func (p *Pool) Free(ops *PoolState) {
+// Free resets the pool state to a starting point and
+// puts it into the pool.
+func (p *Pool) Free(ops *State) {
     ops.Buffer.Reset()
     ops.Map.Reset()
     p.Set(ops)
