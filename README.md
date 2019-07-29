@@ -40,6 +40,7 @@
 ----
 
 <h2 id="intro">🌚 Intro</h2>
+
 A lot of people don't care about the context stuff and expect to see the code,
 output and specs, so without further a due:
 
@@ -59,7 +60,8 @@ logger.name | debug  2019/7/28 20:54:40.683859000 [4666]:   And that is it!
 Coming soon...
 
 <h2 id="usage">🔧 Usage</h2>
-Aight. If you're staying with me to see more complex usage of this lib - go into the examples folder or keep reading.
+
+Aight. If you're staying with me to see more complex usage of this lib - go into the [examples](examples) folder or keep reading.
 
 #### Factories
 These are things that help you to populate logger with a specific configuration that
@@ -216,5 +218,6 @@ go get github.com/olehan/kek
 ```
 
 <h2 id="license">🔖 License</h2>
+
 It's [MIT](LICENSE).
 What else would you expect? 🌚
