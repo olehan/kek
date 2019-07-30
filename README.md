@@ -12,7 +12,7 @@
     <a href="https://travis-ci.org/olehan/kek">
         <img alt="Travis Status" src="https://travis-ci.org/olehan/kek.svg">
     </a>
-    <a href="https://github.com/olehan/kek/releases">
+    <a href="https://codecov.io/gh/olehan/kek">
         <img alt="Kek Code Coverage" src="https://img.shields.io/codecov/c/github/olehan/kek">
     </a>
     <a href="https://github.com/olehan/kek/blob/master/LICENSE">
@@ -21,7 +21,7 @@
     <a href="https://github.com/olehan/kek/releases">
         <img alt="Kek Last Release" src="https://img.shields.io/github/release-date/olehan/kek">
     </a>
-    <a href="https://github.com/olehan/kek/releases">
+    <a href="https://github.com/olehan/kek/commits/master">
         <img alt="Kek Last Commit" src="https://img.shields.io/github/last-commit/olehan/kek">
     </a>
 </p>
