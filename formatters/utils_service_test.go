@@ -118,15 +118,12 @@ func TestFormatterUtils_StringifyByTemplate(t *testing.T) {
 
     buf := buffer.NewBuffer()
     buf.WriteString(values[0].(string))
-    buf.WriteSpace()
     buf.WriteInt(int64(values[1].(int)))
-    buf.WriteSpace()
     buf.WriteFloat(values[2].(float64), 64)
-    buf.WriteSpace()
     buf.WriteBool(values[3].(bool))
 
     state := _testFormatterPool.Get()
-    _testFormatter.StringifyByTemplate(state, "{} {} {} {}", values...)
+    _testFormatter.StringifyByTemplate(state, "{}{}{}{}", values...)
     if string(state.Buffer) != string(buf) {
         t.Fail()
     }
