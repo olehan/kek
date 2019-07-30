@@ -29,6 +29,9 @@ func init() {
 
 func TestFormatterModel_Print(t *testing.T) {
     _testFormatter.Print(_testFormatterConfig, "value")
+    _testFormatterConfig.SetWithColors(false)
+    _testFormatter.Print(_testFormatterConfig, "value")
+    _testFormatterConfig.SetWithColors(true)
 }
 
 func TestFormatterModel_PrintTemplate(t *testing.T) {
