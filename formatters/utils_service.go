@@ -116,9 +116,6 @@ func (f *FormatterUtils) StringifyByTemplate(ps *pool.State, template string, va
             printedValues++
             i += 2
         } else {
-            if templateLenIndex < i {
-                break
-            }
             ps.Buffer.WriteByte(template[i])
             i++
         }
