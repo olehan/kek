@@ -102,9 +102,9 @@ func (f *FormatterUtils) StringifyByTemplate(ps *pool.State, template string, va
     printedValues := 0
     valuesLen := len(values)
 
-    for i := 0; i < templateLen; i++ {
+    i := 0
+    for i < templateLen {
         templateLenIndex := templateLen - 1
-
 
         if  i < templateLenIndex &&
             printedValues < valuesLen &&
@@ -114,13 +114,13 @@ func (f *FormatterUtils) StringifyByTemplate(ps *pool.State, template string, va
             f.StringifyValue(ps, values[printedValues])
 
             printedValues++
-            i++
+            i += 2
         } else {
+            if templateLenIndex < i {
+                break
+            }
             ps.Buffer.WriteByte(template[i])
-        }
-
-        if templateLenIndex < i {
-            break
+            i++
         }
     }
 }

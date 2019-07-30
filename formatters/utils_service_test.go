@@ -117,13 +117,17 @@ func TestFormatterUtils_StringifyByTemplate(t *testing.T) {
     values := []interface{}{"value", 2345245, 245235624.234562453, false}
 
     buf := buffer.NewBuffer()
+    buf.WriteString("values")
     buf.WriteString(values[0].(string))
+    buf.WriteString("a")
     buf.WriteInt(int64(values[1].(int)))
+    buf.WriteString(".---")
     buf.WriteFloat(values[2].(float64), 64)
     buf.WriteBool(values[3].(bool))
+    buf.WriteString("{}")
 
     state := _testFormatterPool.Get()
-    _testFormatter.StringifyByTemplate(state, "{}{}{}{}", values...)
+    _testFormatter.StringifyByTemplate(state, "values{}a{}.---{}{}{}", values...)
     if string(state.Buffer) != string(buf) {
         t.Fail()
     }
