@@ -9,13 +9,15 @@ func (m Map) Set(key string, value interface{}) Map {
 // Delete removes value from the Map by setting nil value
 // by the given key.
 func (m Map) Delete(key string) Map {
-    return m.Set(key, nil)
+    delete(m, key)
+    return m
 }
 
 // Reset resets the whole map by setting nil value to
 // every key init.
-func (m Map) Reset() {
+func (m Map) Reset() Map {
     for k := range m {
-        m.Set(k, nil)
+        delete(m, k)
     }
+    return m
 }

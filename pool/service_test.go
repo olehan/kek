@@ -14,4 +14,7 @@ func TestPool(t *testing.T) {
         panic("Buffer from state has no assigned space")
     }
     _testPool.Free(s)
+    if len(s.Buffer) != 0 {
+        panic("Buffer hasn't changed after the reset")
+    }
 }

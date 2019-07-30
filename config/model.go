@@ -137,8 +137,3 @@ func (c *Config) Copy() *Config {
     cp := c.Value()
     return &cp
 }
-
-// CopyValue returns a new copy of the config value.
-func (c *Config) CopyValue() Config {
-    return c.Copy().Value()
-}

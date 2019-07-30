@@ -36,5 +36,6 @@ func (l *Logger) SetFormatter(formatter formatters.Formatter) *Logger {
     l.Panic.(printer.LoggerPrinter).SetFormatter(formatter)
     l.Note.(printer.LoggerPrinter).SetFormatter(formatter)
     l.Succ.(printer.LoggerPrinter).SetFormatter(formatter)
+    l.formatter = formatter
     return l
 }

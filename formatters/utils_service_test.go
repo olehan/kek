@@ -1,12 +1,15 @@
 package formatters
 
 import (
+    "github.com/olehan/kek/buffer"
+    "github.com/olehan/kek/ds"
     "github.com/olehan/kek/pool"
+    "strings"
     "testing"
 )
 
 var (
-    _testFormatterPoolState = pool.NewPool().Get()
+    _testFormatterPool = pool.NewPool()
     _testFormatter = NewFormatterUtils()
 )
 
@@ -18,7 +21,7 @@ func (_namedStruct) method(arg int) string {
     return "a"
 }
 
-func TestFormatter_stringifyValues(t *testing.T) {
+func TestFormatterUtils_StringifyValues(t *testing.T) {
     intValue := 13453463
     int8Value := int8(127)
     int16Value := int16(3003)
@@ -49,9 +52,12 @@ func TestFormatter_stringifyValues(t *testing.T) {
         },
         slice: []string{""},
     }
+    interfaceSlice := []interface{}{}
+
+    state := _testFormatterPool.Get()
 
     _testFormatter.StringifyValues(
-        _testFormatterPoolState,
+        state,
         nil,
         _namedStruct{},
         intValue,
@@ -72,7 +78,57 @@ func TestFormatter_stringifyValues(t *testing.T) {
         complex64Value,
         complex128Value,
         structValue,
+        interfaceSlice,
     )
 
-    t.Log(string(_testFormatterPoolState.Buffer))
+    t.Log(string(state.Buffer))
+    _testFormatterPool.Free(state)
+}
+
+func TestFormatterUtils_KeyValuesToMap(t *testing.T) {
+    state := _testFormatterPool.Get()
+    expectedKey := "key1"
+    expectedValue := "value1"
+    _testFormatter.KeyValuesToMap(state, expectedKey, expectedValue, 134, 134, "skips this")
+    if state.Map[expectedKey] != expectedValue {
+        t.Fail()
+    }
+    _testFormatterPool.Free(state)
+}
+
+func TestFormatterUtils_StringifyByTemplateMap(t *testing.T) {
+    state := _testFormatterPool.Get()
+    expectedKey := "key1"
+    expectedValue := "value1"
+    template := "key: {{key1}}"
+    expectedOutput := strings.Replace(template, "{{" + expectedKey + "}}", expectedValue, 1)
+    _testFormatter.StringifyByTemplateMap(
+        state,
+        template,
+        ds.NewMap().Set(expectedKey, expectedValue),
+    )
+    if expectedOutput != string(state.Buffer) {
+        t.Fail()
+    }
+    _testFormatterPool.Free(state)
+}
+
+func TestFormatterUtils_StringifyByTemplate(t *testing.T) {
+    values := []interface{}{"value", 2345245, 245235624.234562453, false}
+
+    buf := buffer.NewBuffer()
+    buf.WriteString(values[0].(string))
+    buf.WriteSpace()
+    buf.WriteInt(int64(values[1].(int)))
+    buf.WriteSpace()
+    buf.WriteFloat(values[2].(float64), 64)
+    buf.WriteSpace()
+    buf.WriteBool(values[3].(bool))
+
+    state := _testFormatterPool.Get()
+    _testFormatter.StringifyByTemplate(state, "{} {} {} {}", values...)
+    if string(state.Buffer) != string(buf) {
+        t.Fail()
+    }
+    _testFormatterPool.Free(state)
 }
