@@ -37,8 +37,3 @@ func (l *LoggerConfig) Copy() *LoggerConfig {
     cp := l.Value()
     return &cp
 }
-
-// CopyValue returns a new copy of the logger config value.
-func (l *LoggerConfig) CopyValue() LoggerConfig {
-    return l.Copy().Value()
-}
