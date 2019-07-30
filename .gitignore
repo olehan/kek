@@ -2,3 +2,6 @@
 .idea
 .vscode
 .sublime_project
+
+# Coverage results
+coverage.txt
