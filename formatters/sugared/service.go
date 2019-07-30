@@ -64,7 +64,6 @@ func WriteName(fs *formatters.FormatterConfig, separator string) {
 func WriteNameTabulation(fs *formatters.FormatterConfig) {
     if fs.WithNameTabulation {
         for i := 0; i < names.LongestNameLen() - len(fs.Name); i++ {
-            println("has", string(fs.PoolState.Buffer))
             fs.PoolState.Buffer.WriteSpace()
         }
     }
