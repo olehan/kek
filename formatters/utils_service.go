@@ -114,14 +114,14 @@ func (f *FormatterUtils) StringifyByTemplate(ps *pool.State, template string, va
             f.StringifyValue(ps, values[printedValues])
 
             printedValues++
-            i += 2
+            i++
+        } else {
+            ps.Buffer.WriteByte(template[i])
         }
 
         if templateLenIndex < i {
             break
         }
-
-        ps.Buffer.WriteByte(template[i])
     }
 }
 
