@@ -4,6 +4,8 @@ import (
     "github.com/olehan/kek/buffer"
     "github.com/olehan/kek/ds"
     "github.com/olehan/kek/pool"
+    "os"
+    "reflect"
     "strings"
     "testing"
 )
@@ -33,8 +35,13 @@ func TestFormatterUtils_StringifyValues(t *testing.T) {
     uint32Value := uint32(13411334)
     uint64Value := uint64(13524636364)
     uintptrValue := uintptr(346457456356)
-    stringValue := string("oih24t9h334rad")
+    stringValue := "oih24t9h334rad"
     boolValue := true
+    mapValue := map[string]int{
+        "value2": 1,
+        "value1": 41,
+        "longvaluegoeshere": 354345245,
+    }
     float32Value := float32(245245.23423)
     float64Value := float64(2463621.351313)
     complex64Value := complex64(2346363623452.45235135134134)
@@ -42,24 +49,39 @@ func TestFormatterUtils_StringifyValues(t *testing.T) {
     structValue := struct {
         x int
         y int
+        b bool
+        f32 float32
+        f64 float64
+        u uint64
+        c128 complex128
+        c64 complex64
         a func() interface{}
         slice []string
+        nilFunc func()
+        nilMap map[string]bool
     }{
         x: 1,
         y: 2,
         a: func() interface{} {
             return ""
         },
-        slice: []string{""},
+        slice: []string{"a"},
     }
-    interfaceSlice := []interface{}{}
+    interfaceSlice := []interface{}{"stringval", 123}
 
     state := _testFormatterPool.Get()
 
     _testFormatter.StringifyValues(
         state,
         nil,
-        _namedStruct{},
+        _namedStruct{
+            "sd",
+        },
+        &interfaceSlice,
+        &_namedStruct{},
+        mapValue,
+        reflect.ValueOf(mapValue),
+        os.Stdout,
         intValue,
         int8Value,
         int16Value,
@@ -75,10 +97,10 @@ func TestFormatterUtils_StringifyValues(t *testing.T) {
         boolValue,
         float32Value,
         float64Value,
-        complex64Value,
-        complex128Value,
         structValue,
         interfaceSlice,
+        complex64Value,
+        complex128Value,
     )
 
     t.Log(string(state.Buffer))
