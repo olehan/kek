@@ -13,7 +13,7 @@
         <img alt="Travis Status" src="https://travis-ci.org/olehan/kek.svg">
     </a>
     <a href="https://codecov.io/gh/olehan/kek">
-        <img alt="Kek Code Coverage" src="https://img.shields.io/codecov/c/github/olehan/kek">
+        <img alt="Kek Code Coverage" src="https://codecov.io/gh/olehan/kek/branch/master/graph/badge.svg">
     </a>
     <a href="https://github.com/olehan/kek/blob/master/LICENSE">
         <img alt="Kek License" src="https://img.shields.io/github/license/mashape/apistatus.svg">
