@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-    Zero alloc structured golang logger.
+    Zero allocated, structured, leveled and pretty Golang logger
 </p>
 
 <p align="center">
@@ -19,10 +19,7 @@
         <img alt="Kek License" src="https://img.shields.io/github/license/mashape/apistatus.svg">
     </a>
     <a href="https://github.com/olehan/kek/releases">
-        <img alt="Kek Last Release" src="https://img.shields.io/github/release-date/olehan/kek">
-    </a>
-    <a href="https://github.com/olehan/kek/commits/master">
-        <img alt="Kek Last Commit" src="https://img.shields.io/github/last-commit/olehan/kek">
+        <img alt="Kek Last Release" src="https://img.shields.io/github/tag/olehan/kek.svg?label=release">
     </a>
 </p>
 
