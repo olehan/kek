@@ -1,9 +1,11 @@
 package printer
 
 import (
-    "github.com/olehan/kek/formatters"
-    "github.com/olehan/kek/pool"
     "github.com/olehan/kek/ds"
+    "github.com/olehan/kek/formatters"
+    "github.com/olehan/kek/levels"
+    "github.com/olehan/kek/pool"
+    "os"
 )
 
 // Print manages base formatters writing functionality.
@@ -83,9 +85,16 @@ func (p *Printer) initState() (ps *pool.State, fc *formatters.FormatterConfig) {
 }
 
 func (p *Printer) reset(ps *pool.State) {
-    p.fc.SetPoolState(nil)
-    p.pool.Free(ps)
-    if p.fc.UseMutex {
-        p.mutex.Unlock()
+    switch p.level {
+    case levels.Fatal:
+        os.Exit(1)
+    case levels.Panic:
+        panic(string(ps.Buffer))
+    default:
+        p.fc.SetPoolState(nil)
+        p.pool.Free(ps)
+        if p.fc.UseMutex {
+            p.mutex.Unlock()
+        }
     }
 }
