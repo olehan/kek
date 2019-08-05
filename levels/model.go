@@ -51,7 +51,7 @@ var (
         Note: colors.Cyan.Add(NonColoredLevelMap[Note], colors.Bold),
         Warn: colors.Yellow.Add(NonColoredLevelMap[Warn], colors.Bold),
         Error: colors.Red.Add(NonColoredLevelMap[Error]),
-        Fatal: colors.Red.Add(NonColoredLevelMap[Note], colors.Bold),
+        Fatal: colors.Red.Add(NonColoredLevelMap[Fatal], colors.Bold),
         Panic: colors.Red.Add(NonColoredLevelMap[Panic], colors.Bold, colors.Underline),
     }
 )
