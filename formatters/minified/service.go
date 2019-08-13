@@ -16,4 +16,5 @@ func WriteMetaInfo(fs *formatters.FormatterConfig) {
     sugared.WriteName(fs, " - ")
     sugared.WriteLevel(fs)
     fs.PoolState.Buffer.WriteString(": ")
+    sugared.WriteLevelTabulation(fs)
 }
