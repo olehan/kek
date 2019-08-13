@@ -10,13 +10,13 @@
 
 <p align="center">
     <a href="https://travis-ci.org/olehan/kek">
-        <img alt="Travis Status" src="https://travis-ci.org/olehan/kek.svg">
+        <img alt="Travis Status" src="https://img.shields.io/travis/olehan/kek?logo=travis">
     </a>
     <a href="https://codecov.io/gh/olehan/kek">
         <img alt="Kek Code Coverage" src="https://codecov.io/gh/olehan/kek/branch/master/graph/badge.svg">
     </a>
     <a href="https://github.com/olehan/kek/blob/master/LICENSE">
-        <img alt="Kek License" src="https://img.shields.io/github/license/mashape/apistatus.svg">
+        <img alt="Kek License" src="https://img.shields.io/github/license/olehan/kek.svg">
     </a>
     <a href="https://github.com/olehan/kek/releases">
         <img alt="Kek Last Release" src="https://img.shields.io/github/tag/olehan/kek.svg?label=release">
