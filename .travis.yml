@@ -12,9 +12,7 @@ go:
 before_install:
   - go get -u golang.org/x/lint/golint
 
-script:
-  - golint -set_exit_status buffer colors config ds formatters levels names pool printer .
-  - go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+script: make check
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
