@@ -21,19 +21,8 @@ bootstrap-hooks:
 	chmod +x $(PRE_COMMIT_HOOK_PATH)
 
 bootstrap:
-	make check-go-mod
-	go mod download
-	go mod vendor
 	make check
 	make bootstrap-hooks
-
-check-go-mod:
-ifneq ($(GO111MODULE), on)
-	echo "Set GO111MODULE to 'on' first"
-	exit 1
-else
-	echo "GO111MODULE is set"
-endif
 
 check-pre-commit-hook:
 ifneq ("$(wildcard $(PRE_COMMIT_HOOK_PATH))", "")
