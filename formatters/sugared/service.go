@@ -19,6 +19,7 @@ func WriteMetaInfo(fs *formatters.FormatterConfig) {
     WriteName(fs, " | ")
 
     WriteLevel(fs)
+    WriteLevelTabulation(fs)
 
     if fs.WithColors {
         fs.PoolState.Buffer.WriteString(bold)
@@ -76,8 +77,6 @@ func WriteLevel(fs *formatters.FormatterConfig) {
     } else {
         fs.PoolState.Buffer.WriteString(levels.NonColoredLevelMap[fs.Level])
     }
-
-    WriteLevelTabulation(fs)
 }
 
 // WriteLevelTabulation writes the level tabulation depending
