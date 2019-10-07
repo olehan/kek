@@ -1,4 +1,4 @@
-name: Go
+name: Lint and Test with Coverage
 on: [push]
 jobs:
 
@@ -18,8 +18,8 @@ jobs:
 
     - name: Lint and Test
       run: |
-        go get -u golang.org/x/lint/golint
+        GO111MODULE=off go get -u golang.org/x/lint/golint
         make check
     
-    - name: Send covarage
+    - name: Send coverage
       run: bash <(curl -s https://codecov.io/bash)
