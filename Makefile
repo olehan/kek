@@ -3,13 +3,13 @@ export FORCE_COLOR = true
 PRE_COMMIT_HOOK_PATH = .git/hooks/pre-commit
 PRE_COMMIT_TEMPLATE_HOOK_PATH = hooks/pre-commit.sh
 
-.PHONY: bootstrap bootstrap-hooks test lint check
+.PHONY: bootstrap benchmarks bootstrap-hooks test lint check
 
 lint:
-	golint -set_exit_status buffer colors config ds formatters levels names pool printer .
+	golint -set_exit_status `go list ./... | grep -v formatters`
 
 test:
-	go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+	go test -v -race -coverprofile=coverage.txt -covermode=atomic `go list ./... | grep -v benchmarks`
 
 check:
 	make lint
@@ -31,3 +31,6 @@ ifneq ("$(wildcard $(PRE_COMMIT_HOOK_PATH))", "")
 else
 	echo "Pre-commit hook is missing"
 endif
+
+benchmarks:
+	go test -bench=. ./benchmarks/ > benchmarks.txt
