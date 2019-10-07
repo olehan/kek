@@ -9,6 +9,12 @@
 </p>
 
 <p align="center">
+    <a href="https://github.com/olehan/kek/actions?workflow=Lint+and+Test+with+Coverage">
+        <img
+          src="https://github.com/olehan/kek/workflows/Lint%20and%20Test%20with%20Coverage/badge.svg?label=shit"
+          alt="Kek Github Action Lint and Test with Coverage"
+        >
+    </a>
     <a href="https://travis-ci.org/olehan/kek">
         <img alt="Travis Status" src="https://img.shields.io/travis/olehan/kek?logo=travis">
     </a>
