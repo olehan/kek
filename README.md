@@ -47,9 +47,6 @@
 
 <h2 id="intro">🌚 Intro</h2>
 
-A lot of people don't care about the context stuff and expect to see the code,
-output and specs, so without further a due:
-
 ***Code:***
 ```go
 // Here we are, just creating our new logger with a default 'formatter'.
@@ -63,7 +60,30 @@ logger.name | debug  2019/7/28 20:54:40.683859000 [4666]:   And that is it!
 ```
 
 <h2 id="benchmarks">🏃 Benchmarks</h2>
-Coming soon...
+
+***Machine:***
+```
+Intel Xeon E3-1280 v6
+Cores: 4x 3.90 GHz (Single Quad Core)
+32 GB RAM
+2x 1 TB SATA 7.2k RPM (Software RAID 1)
+Ubuntu 18.04 (Bionic Beaver) LTS minimal [64bit]
+
+Uptime 1 day
+```
+
+***Results in average from 15 runs:***
+```bash
+BenchmarkLogger_PrintlnWithEmptyWriter-8    	 1530000	       760 ns/op	       0 B/op	       0 allocs/op
+BenchmarkLogger_PrintlnWithStdoutWriter-8         590000	      2010 ns/op	       0 B/op	       0 allocs/op
+BenchmarkLogger_PrintTMithEmptyWriter-8     	 1450000	       815 ns/op	       0 B/op	       0 allocs/op
+BenchmarkLogger_PrintTMithStdoutWriter-8          570000	      2050 ns/op	       0 B/op	       0 allocs/op
+BenchmarkLogger_PrintTMWithEmptyWriter-8    	 1350000	       870 ns/op	       0 B/op	       0 allocs/op
+BenchmarkLogger_PrintTMWithStdoutWriter-8         550000	      2100 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/olehan/kek/benchmarks	9s
+```
+
 
 <h2 id="usage">🔧 Usage</h2>
 
