@@ -18,9 +18,10 @@ jobs:
 
     - name: Lint and Test
       run: |
-        GO111MODULE=off go get -u golang.org/x/lint/golint
         export GOBIN=$(go env GOROOT)/bin
         export PATH=$PATH:$GOBIN
+        GO111MODULE=off go get -u golang.org/x/lint/golint
+        go install golang.org/x/lint/golint
         make check
     
     - name: Send coverage
