@@ -2,14 +2,14 @@ package benchmarks
 
 import "testing"
 
-func BenchmarkLogger_PrintTWithEmptyWriter(b *testing.B) {
+func BenchmarkLogger_PrintTMithEmptyWriter(b *testing.B) {
     b.ReportAllocs()
     for i := 0; i < b.N; i++ {
         _testEmptyLogger.Debug.PrintT(_testSimpleFormat, _testValues...)
     }
 }
 
-func BenchmarkLogger_PrintTWithStdoutWriter(b *testing.B) {
+func BenchmarkLogger_PrintTMithStdoutWriter(b *testing.B) {
     b.ReportAllocs()
     for i := 0; i < b.N; i++ {
         _testStdoutLogger.Debug.PrintT(_testSimpleFormat, _testValues...)
