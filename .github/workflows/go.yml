@@ -18,9 +18,7 @@ jobs:
 
     - name: Get dependencies
       run: |
-        GO111MODULE=off go get -u golang.org/x/lint/golint
-        go mod download
-        go mod vendor
+        go get -v -t -d ./...
 
     - name: Lint and Test
       run: make check
