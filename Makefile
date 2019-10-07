@@ -6,10 +6,10 @@ PRE_COMMIT_TEMPLATE_HOOK_PATH = hooks/pre-commit.sh
 .PHONY: bootstrap benchmarks bootstrap-hooks test lint check
 
 lint:
-	golint -set_exit_status buffer colors config ds formatters levels names pool printer .
+	golint -set_exit_status `go list ./... | grep -v formatters`
 
 test:
-	go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+	go test -v -race -coverprofile=coverage.txt -covermode=atomic `go list ./... | grep -v benchmarks`
 
 check:
 	make lint
